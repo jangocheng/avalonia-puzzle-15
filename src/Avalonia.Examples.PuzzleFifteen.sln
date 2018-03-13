@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Examples.PuzzleFifteen", "Avalonia.Examples.PuzzleFifteen\Avalonia.Examples.PuzzleFifteen.csproj", "{78DEE5BC-1958-4B44-8798-28E965420811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Examples.PuzzleFifteen.Tests", "Avalonia.Examples.PuzzleFifteen.Tests\Avalonia.Examples.PuzzleFifteen.Tests.csproj", "{5F555F86-5DBA-4D91-B6AF-2C0198BC870A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78DEE5BC-1958-4B44-8798-28E965420811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78DEE5BC-1958-4B44-8798-28E965420811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78DEE5BC-1958-4B44-8798-28E965420811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78DEE5BC-1958-4B44-8798-28E965420811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F555F86-5DBA-4D91-B6AF-2C0198BC870A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F555F86-5DBA-4D91-B6AF-2C0198BC870A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F555F86-5DBA-4D91-B6AF-2C0198BC870A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F555F86-5DBA-4D91-B6AF-2C0198BC870A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD02944C-DE8E-4024-98CD-4AB8B7970649}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,58 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:cn="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
+        MinWidth="800"
+        MinHeight="600"
+        WindowState="Maximized"
+        Background="WhiteSmoke"
+        Title="{Binding Path=Title, Mode=OneTime}"
+        Icon="resm:Avalonia.Examples.PuzzleFifteen.Assets.App.png">
+    <Window.KeyBindings>
+        <KeyBinding Command="{Binding Path=ShuffleCommand, Mode=OneTime}"
+                    Gesture="Space" />
+        <KeyBinding Command="{Binding Path=MoveLeftCommand, Mode=OneTime}"
+                    Gesture="Left" />
+        <KeyBinding Command="{Binding Path=MoveRightCommand, Mode=OneTime}"
+                    Gesture="Right" />
+        <KeyBinding Command="{Binding Path=MoveUpCommand, Mode=OneTime}"
+                    Gesture="Up" />
+        <KeyBinding Command="{Binding Path=MoveDownCommand, Mode=OneTime}"
+                    Gesture="Down" />
+    </Window.KeyBindings>
+    <Grid Margin="10"
+          VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   HorizontalAlignment="Center"
+                   FontWeight="Light"
+                   FontSize="20"
+                   Text="{Binding Path=ShuffleLegend, Mode=OneTime}" />
+        <cn:PuzzleControl Grid.Row="2"
+                          Width="400"
+                          Height="400"
+                          State="{Binding Path=PuzzleState, Mode=OneWay}" />
+        <TextBlock Grid.Row="4"
+                   HorizontalAlignment="Center"
+                   FontSize="20"
+                   FontWeight="Light"
+                   Text="{Binding Path=MovementsLegend, Mode=OneTime}" />
+        <Border Grid.Row="2"
+                IsVisible="{Binding Path=IsPuzzleCompleted, Mode=OneWay}"
+                Width="500"
+                Height="100"
+                BorderThickness="5"
+                BorderBrush="LimeGreen"
+                Background="WhiteSmoke">
+            <TextBlock Grid.Row="4"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="40"
+                       Text="{Binding Path=CompletionMessage, Mode=OneTime}" />
+        </Border>
+    </Grid>
+</Window>

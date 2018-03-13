@@ -1,0 +1,26 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:cn="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
+        xmlns:cv="clr-namespace:Avalonia.Examples.PuzzleFifteen.Converters;assembly=Avalonia.Examples.PuzzleFifteen">
+    <Style Selector="cn|PuzzleControl">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Canvas Name="PART_Canvas" />
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="cn|PuzzlePieceControl">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border>
+                    <Border Background="Gainsboro"
+                            Margin="5">
+                        <TextBlock VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="28"
+                                   Text="{Binding Path=., Converter={cv:PuzzlePieceToStringConverter}}" />
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
