@@ -121,7 +121,7 @@
     <value>{0} (Host)</value>
   </data>
   <data name="app.window.title" xml:space="preserve">
-    <value>Avalonia Example: Puzzle "Fifteen"</value>
+    <value>Avalonia Example - Puzzle "Fifteen"</value>
   </data>
   <data name="puzzle.legend.movements" xml:space="preserve">
     <value>Use space key to shuffle puzzle pieces</value>

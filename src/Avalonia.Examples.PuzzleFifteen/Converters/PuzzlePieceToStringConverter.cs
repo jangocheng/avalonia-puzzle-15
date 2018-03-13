@@ -8,7 +8,7 @@ namespace Avalonia.Examples.PuzzleFifteen.Converters
     {
         protected override string Convert(PuzzlePiece value, object parameter, CultureInfo culture)
         {
-            return ((int)value).ToString("00", CultureInfo.InvariantCulture);
+            return ((byte)value).ToString("00", CultureInfo.InvariantCulture);
         }
     }
 }

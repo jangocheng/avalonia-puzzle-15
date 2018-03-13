@@ -234,7 +234,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
         /// <param name="obj1">The left <see cref="PuzzleState" /> operand.</param>
         /// <param name="obj2">The right <see cref="PuzzleState" /> operand.</param>
         /// <returns><see langword="true" /> if the left <see cref="PuzzleState" /> is equal to the right <see cref="PuzzleState" />; otherwise, <see langword="false" />.</returns>
-        public static bool operator ==(in PuzzleState obj1, in PuzzleState obj2)
+        public static bool operator ==(PuzzleState obj1, PuzzleState obj2)
         {
             return obj1.Equals(obj2);
         }
@@ -243,7 +243,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
         /// <param name="obj1">The left <see cref="PuzzleState" /> operand.</param>
         /// <param name="obj2">The right <see cref="PuzzleState" /> operand.</param>
         /// <returns><see langword="true" /> if the left <see cref="PuzzleState" /> is not equal to the right <see cref="PuzzleState" />; otherwise, <see langword="false" />.</returns>
-        public static bool operator !=(in PuzzleState obj1, in PuzzleState obj2)
+        public static bool operator !=(PuzzleState obj1, PuzzleState obj2)
         {
             return !obj1.Equals(obj2);
         }
