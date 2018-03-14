@@ -29,33 +29,33 @@ namespace Avalonia.Examples.PuzzleFifteen.Tests
         }
 
         [Fact]
-        public void Movements()
+        public void Apply()
         {
             var state = PuzzleState.Completed;
 
-            state = state.Move(PuzzleMovement.Right);
+            state = state.Apply(PuzzleMovement.Right);
 
             Assert.Equal((3, 3), state[PuzzlePiece.Piece15]);
             Assert.Equal((2, 3), state[PuzzlePiece.Space]);
 
-            state = state.Move(PuzzleMovement.Down);
+            state = state.Apply(PuzzleMovement.Down);
 
             Assert.Equal((2, 3), state[PuzzlePiece.Piece11]);
             Assert.Equal((2, 2), state[PuzzlePiece.Space]);
 
-            state = state.Move(PuzzleMovement.Left);
+            state = state.Apply(PuzzleMovement.Left);
 
             Assert.Equal((2, 2), state[PuzzlePiece.Piece12]);
             Assert.Equal((3, 2), state[PuzzlePiece.Space]);
 
-            state = state.Move(PuzzleMovement.Up);
+            state = state.Apply(PuzzleMovement.Up);
 
             Assert.Equal((3, 2), state[PuzzlePiece.Piece15]);
             Assert.Equal((3, 3), state[PuzzlePiece.Space]);
         }
 
         [Fact]
-        public void ItemByPiece()
+        public void Indexer()
         {
             var state = PuzzleState.Completed;
 

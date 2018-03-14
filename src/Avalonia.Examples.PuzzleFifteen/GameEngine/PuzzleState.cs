@@ -43,7 +43,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
             throw new InvalidOperationException(Strings.GetString("puzzle.state.indexer.piece_not_found"));
         }
 
-        private void Move(byte[] matrix, PuzzleMovement movement, int spaceX, int spaceY)
+        private void Apply(byte[] matrix, PuzzleMovement movement, int spaceX, int spaceY)
         {
             switch (movement)
             {
@@ -125,10 +125,10 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
             get => FindPiece(_matrix, piece);
         }
 
-        /// <summary>Execute the specified movements.</summary>
+        /// <summary>Apply the specified movements to the current state.</summary>
         /// <param name="movements">The puzzle movements to execute.</param>
         /// <returns>The puzzle state after movements.</returns>
-        public PuzzleState Move(params PuzzleMovement[] movements)
+        public PuzzleState Apply(params PuzzleMovement[] movements)
         {
             var matrix = new byte[_matrix.Length];
 
@@ -138,7 +138,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
             {
                 var (spaceX, spaceY) = FindPiece(matrix, PuzzlePiece.Space);
 
-                Move(matrix, movements[i], spaceX, spaceY);
+                Apply(matrix, movements[i], spaceX, spaceY);
             }
 
             return new PuzzleState(matrix);

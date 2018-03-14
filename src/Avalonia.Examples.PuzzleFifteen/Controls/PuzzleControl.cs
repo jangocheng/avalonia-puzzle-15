@@ -97,22 +97,22 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
             {
                 if (pieceSlot.X == spaceSlot.X + 1)
                 {
-                    State = State.Move(PuzzleMovement.Left);
+                    State = State.Apply(PuzzleMovement.Left);
                 }
                 else if (pieceSlot.X == spaceSlot.X - 1)
                 {
-                    State = State.Move(PuzzleMovement.Right);
+                    State = State.Apply(PuzzleMovement.Right);
                 }
             }
             else if (pieceSlot.X == spaceSlot.X)
             {
                 if (pieceSlot.Y == spaceSlot.Y + 1)
                 {
-                    State = State.Move(PuzzleMovement.Up);
+                    State = State.Apply(PuzzleMovement.Up);
                 }
                 else if (pieceSlot.Y == spaceSlot.Y - 1)
                 {
-                    State = State.Move(PuzzleMovement.Down);
+                    State = State.Apply(PuzzleMovement.Down);
                 }
             }
         }

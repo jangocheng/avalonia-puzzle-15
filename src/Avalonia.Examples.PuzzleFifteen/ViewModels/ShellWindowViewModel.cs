@@ -42,7 +42,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
                 movements[i] = (PuzzleMovement)(bytes[i] / 64);
             }
 
-            return PuzzleState.Completed.Move(movements);
+            return PuzzleState.Completed.Apply(movements);
         }
 
         private void ShuffleCommandAction(object parameter)
@@ -61,25 +61,25 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
 
         private void MoveLeftCommandAction(object parameter)
         {
-            PuzzleState = PuzzleState.Move(PuzzleMovement.Left);
+            PuzzleState = PuzzleState.Apply(PuzzleMovement.Left);
             CheckPuzzleState();
         }
 
         private void MoveRightCommandAction(object parameter)
         {
-            PuzzleState = PuzzleState.Move(PuzzleMovement.Right);
+            PuzzleState = PuzzleState.Apply(PuzzleMovement.Right);
             CheckPuzzleState();
         }
 
         private void MoveUpCommandAction(object parameter)
         {
-            PuzzleState = PuzzleState.Move(PuzzleMovement.Up);
+            PuzzleState = PuzzleState.Apply(PuzzleMovement.Up);
             CheckPuzzleState();
         }
 
         private void MoveDownCommandAction(object parameter)
         {
-            PuzzleState = PuzzleState.Move(PuzzleMovement.Down);
+            PuzzleState = PuzzleState.Apply(PuzzleMovement.Down);
             CheckPuzzleState();
         }
 
