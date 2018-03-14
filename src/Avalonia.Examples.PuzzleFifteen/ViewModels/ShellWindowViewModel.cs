@@ -14,7 +14,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         private readonly IBindableCommand _moveUpCommand;
         private readonly IBindableCommand _moveDownCommand;
 
-        private PuzzleState _puzzleState = Shuffle();
+        private PuzzleState _puzzleState = CreateShuffled();
         private bool _puzzleCompleted;
 
         public ShellWindowViewModel()
@@ -26,7 +26,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
             _moveDownCommand = new BindableCommand(MoveDownCommandAction, MoveCommandPredicate);
         }
 
-        private static PuzzleState Shuffle()
+        private static PuzzleState CreateShuffled()
         {
             var bytes = new byte[1000];
 
@@ -47,7 +47,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
 
         private void ShuffleCommandAction(object parameter)
         {
-            PuzzleState = Shuffle();
+            PuzzleState = CreateShuffled();
 
             _puzzleCompleted = false;
 
@@ -96,7 +96,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         public PuzzleState PuzzleState
         {
             get => GetValue(ref _puzzleState);
-            set => SetValue(ref _puzzleState, value);
+            set => SetValue(ref _puzzleState, value, CheckPuzzleState);
         }
 
         public ICommand ShuffleCommand

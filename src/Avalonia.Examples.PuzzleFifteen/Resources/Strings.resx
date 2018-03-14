@@ -127,13 +127,10 @@
     <value>Use space key to shuffle puzzle pieces</value>
   </data>
   <data name="puzzle.legend.shuffle" xml:space="preserve">
-    <value>Use arrow keys to move puzzle pieces</value>
+    <value>Use arrow keys or pointer to move puzzle pieces</value>
   </data>
   <data name="puzzle.message.completed" xml:space="preserve">
     <value>YOU WON</value>
-  </data>
-  <data name="puzzle.state.indexer.invalid_position" xml:space="preserve">
-    <value>The specified position is invalid</value>
   </data>
   <data name="puzzle.state.indexer.piece_not_found" xml:space="preserve">
     <value>The specified piece is not found</value>

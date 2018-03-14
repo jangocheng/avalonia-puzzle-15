@@ -1,7 +1,9 @@
 ﻿using System;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Examples.PuzzleFifteen.GameEngine;
+using Avalonia.Interactivity;
 
 namespace Avalonia.Examples.PuzzleFifteen.Controls
 {
@@ -10,7 +12,7 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
         public static readonly StyledProperty<PuzzleState> StateProperty =
             AvaloniaProperty.Register<PuzzleControl, PuzzleState>(nameof(State));
 
-        private Canvas _canvas;
+        private AvaloniaList<IControl> _pieceControls;
 
         static PuzzleControl()
         {
@@ -19,67 +21,98 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
 
         private void OnStatePropertyChanged(AvaloniaPropertyChangedEventArgs args)
         {
-            ArrangePieces();
+            ArrangePieceControls();
         }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
             base.OnTemplateApplied(e);
 
-            _canvas = e.NameScope.Find("PART_Canvas") as Canvas;
+            var canvas = e.NameScope.Find("PART_Canvas") as Canvas;
+
+            if (canvas == null)
+            {
+                return;
+            }
+
+            foreach (var piece in Enum.GetValues(typeof(PuzzlePiece)))
+            {
+                if (object.Equals(piece, PuzzlePiece.Space))
+                {
+                    continue;
+                }
+
+                var pieceControl = new PuzzlePieceControl
+                {
+                    DataContext = piece
+                };
+
+                pieceControl.Tapped += OnPieceControlTapped;
+
+                canvas.Children.Add(pieceControl);
+            }
+
+            _pieceControls = canvas.Children;
         }
 
         protected override Size ArrangeOverride(Size finalSize)
         {
             finalSize = base.ArrangeOverride(finalSize);
 
-            ArrangePieces();
+            ArrangePieceControls();
 
             return finalSize;
         }
 
-        private void ArrangePieces()
+        private void ArrangePieceControls()
         {
-            if (_canvas == null)
+            if (_pieceControls == null)
             {
                 return;
             }
 
-            _canvas.Children.Clear();
-
-            var viewportSize = Math.Max(Math.Min(DesiredSize.Width - Padding.Left - Padding.Right, DesiredSize.Height - Padding.Top - Padding.Bottom), 0);
-
-            if (viewportSize == 0)
-            {
-                return;
-            }
-
+            var viewportSize = Math.Min(DesiredSize.Width - Padding.Left - Padding.Right, DesiredSize.Height - Padding.Top - Padding.Bottom);
             var viewportLeft = (DesiredSize.Width - viewportSize) / 2;
             var viewportTop = (DesiredSize.Height - viewportSize) / 2;
             var pieceSize = viewportSize / 4;
 
-            for (var x = 0; x < 4; x++)
+            for (var i = 0; i < _pieceControls.Count; i++)
             {
-                for (var y = 0; y < 4; y++)
+                var pieceControl = (Control)_pieceControls[i];
+                var pieceSlot = State[(PuzzlePiece)pieceControl.DataContext];
+
+                pieceControl.Width = pieceSize;
+                pieceControl.Height = pieceSize;
+                pieceControl.SetValue(Canvas.LeftProperty, viewportLeft + pieceSlot.X * pieceSize);
+                pieceControl.SetValue(Canvas.TopProperty, viewportTop + pieceSlot.Y * pieceSize);
+            }
+        }
+
+        private void OnPieceControlTapped(object sender, RoutedEventArgs e)
+        {
+            var pieceSlot = State[(PuzzlePiece)((Control)sender).DataContext];
+            var spaceSlot = State[PuzzlePiece.Space];
+
+            if (pieceSlot.Y == spaceSlot.Y)
+            {
+                if (pieceSlot.X == spaceSlot.X + 1)
                 {
-                    var piece = State[x, y];
-
-                    if (piece == PuzzlePiece.Space)
-                    {
-                        continue;
-                    }
-
-                    var item = new PuzzlePieceControl
-                    {
-                        Width = pieceSize,
-                        Height = pieceSize,
-                        DataContext = piece
-                    };
-
-                    _canvas.Children.Add(item);
-
-                    item.SetValue(Canvas.LeftProperty, viewportLeft + x * pieceSize);
-                    item.SetValue(Canvas.TopProperty, viewportTop + y * pieceSize);
+                    State = State.Move(PuzzleMovement.Left);
+                }
+                else if (pieceSlot.X == spaceSlot.X - 1)
+                {
+                    State = State.Move(PuzzleMovement.Right);
+                }
+            }
+            else if (pieceSlot.X == spaceSlot.X)
+            {
+                if (pieceSlot.Y == spaceSlot.Y + 1)
+                {
+                    State = State.Move(PuzzleMovement.Up);
+                }
+                else if (pieceSlot.Y == spaceSlot.Y - 1)
+                {
+                    State = State.Move(PuzzleMovement.Down);
                 }
             }
         }

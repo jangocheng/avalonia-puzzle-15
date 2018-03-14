@@ -10,22 +10,22 @@ namespace Avalonia.Examples.PuzzleFifteen.Tests
         {
             var state = PuzzleState.Completed;
 
-            Assert.Equal(PuzzlePiece.Piece01, state[0, 0]);
-            Assert.Equal(PuzzlePiece.Piece02, state[1, 0]);
-            Assert.Equal(PuzzlePiece.Piece03, state[2, 0]);
-            Assert.Equal(PuzzlePiece.Piece04, state[3, 0]);
-            Assert.Equal(PuzzlePiece.Piece05, state[0, 1]);
-            Assert.Equal(PuzzlePiece.Piece06, state[1, 1]);
-            Assert.Equal(PuzzlePiece.Piece07, state[2, 1]);
-            Assert.Equal(PuzzlePiece.Piece08, state[3, 1]);
-            Assert.Equal(PuzzlePiece.Piece09, state[0, 2]);
-            Assert.Equal(PuzzlePiece.Piece10, state[1, 2]);
-            Assert.Equal(PuzzlePiece.Piece11, state[2, 2]);
-            Assert.Equal(PuzzlePiece.Piece12, state[3, 2]);
-            Assert.Equal(PuzzlePiece.Piece13, state[0, 3]);
-            Assert.Equal(PuzzlePiece.Piece14, state[1, 3]);
-            Assert.Equal(PuzzlePiece.Piece15, state[2, 3]);
-            Assert.Equal(PuzzlePiece.Space, state[3, 3]);
+            Assert.Equal((0, 0), state[PuzzlePiece.Piece01]);
+            Assert.Equal((1, 0), state[PuzzlePiece.Piece02]);
+            Assert.Equal((2, 0), state[PuzzlePiece.Piece03]);
+            Assert.Equal((3, 0), state[PuzzlePiece.Piece04]);
+            Assert.Equal((0, 1), state[PuzzlePiece.Piece05]);
+            Assert.Equal((1, 1), state[PuzzlePiece.Piece06]);
+            Assert.Equal((2, 1), state[PuzzlePiece.Piece07]);
+            Assert.Equal((3, 1), state[PuzzlePiece.Piece08]);
+            Assert.Equal((0, 2), state[PuzzlePiece.Piece09]);
+            Assert.Equal((1, 2), state[PuzzlePiece.Piece10]);
+            Assert.Equal((2, 2), state[PuzzlePiece.Piece11]);
+            Assert.Equal((3, 2), state[PuzzlePiece.Piece12]);
+            Assert.Equal((0, 3), state[PuzzlePiece.Piece13]);
+            Assert.Equal((1, 3), state[PuzzlePiece.Piece14]);
+            Assert.Equal((2, 3), state[PuzzlePiece.Piece15]);
+            Assert.Equal((3, 3), state[PuzzlePiece.Space]);
         }
 
         [Fact]
@@ -35,23 +35,23 @@ namespace Avalonia.Examples.PuzzleFifteen.Tests
 
             state = state.Move(PuzzleMovement.Right);
 
-            Assert.Equal(PuzzlePiece.Piece15, state[3, 3]);
-            Assert.Equal(PuzzlePiece.Space, state[2, 3]);
+            Assert.Equal((3, 3), state[PuzzlePiece.Piece15]);
+            Assert.Equal((2, 3), state[PuzzlePiece.Space]);
 
             state = state.Move(PuzzleMovement.Down);
 
-            Assert.Equal(PuzzlePiece.Piece11, state[2, 3]);
-            Assert.Equal(PuzzlePiece.Space, state[2, 2]);
+            Assert.Equal((2, 3), state[PuzzlePiece.Piece11]);
+            Assert.Equal((2, 2), state[PuzzlePiece.Space]);
 
             state = state.Move(PuzzleMovement.Left);
 
-            Assert.Equal(PuzzlePiece.Piece12, state[2, 2]);
-            Assert.Equal(PuzzlePiece.Space, state[3, 2]);
+            Assert.Equal((2, 2), state[PuzzlePiece.Piece12]);
+            Assert.Equal((3, 2), state[PuzzlePiece.Space]);
 
             state = state.Move(PuzzleMovement.Up);
 
-            Assert.Equal(PuzzlePiece.Piece15, state[3, 2]);
-            Assert.Equal(PuzzlePiece.Space, state[3, 3]);
+            Assert.Equal((3, 2), state[PuzzlePiece.Piece15]);
+            Assert.Equal((3, 3), state[PuzzlePiece.Space]);
         }
 
         [Fact]

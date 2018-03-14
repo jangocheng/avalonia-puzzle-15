@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Text;
 using Avalonia.Examples.PuzzleFifteen.Resources;
 
 namespace Avalonia.Examples.PuzzleFifteen.GameEngine
@@ -127,24 +125,6 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
             get => FindPiece(_matrix, piece);
         }
 
-        /// <summary>Get the puzzle piece for the specified position.</summary>
-        /// <param name="x">The horizontal index of the specified piece [0..3].</param>
-        /// <param name="y">The vertical index of the specified piece [0..3].</param>
-        /// <returns>The puzzle piece.</returns>
-        /// <exception cref="InvalidOperationException"><paramref name="x" /> or <paramref name="y" /> is outside the allowable range of values.</exception>
-        public PuzzlePiece this[int x, int y]
-        {
-            get
-            {
-                if ((x < 0) || (x > 3) || (y < 0) || (y > 3))
-                {
-                    throw new InvalidOperationException(Strings.GetString("puzzle.state.indexer.invalid_position"));
-                }
-
-                return (PuzzlePiece)_matrix[y * 4 + x];
-            }
-        }
-
         /// <summary>Execute the specified movements.</summary>
         /// <param name="movements">The puzzle movements to execute.</param>
         /// <returns>The puzzle state after movements.</returns>
@@ -197,37 +177,6 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
 
                 return result;
             }
-        }
-
-        /// <summary>Converts the current <see cref="PuzzleState" /> to its equivalent string representation.</summary>
-        /// <returns>The string representation of the current <see cref="PuzzleState" />.</returns>
-        public override string ToString()
-        {
-            var builder = new StringBuilder();
-
-            for (var y = 0; y < 4; y++)
-            {
-                builder.Append('[');
-
-                for (var x = 0; x < 4; x++)
-                {
-                    builder.AppendFormat(CultureInfo.InvariantCulture, "{0:00}", _matrix[y * 4 + x]);
-
-                    if (x < 3)
-                    {
-                        builder.Append(' ');
-                    }
-                }
-
-                builder.Append(']');
-
-                if (y < 3)
-                {
-                    builder.Append(' ');
-                }
-            }
-
-            return builder.ToString();
         }
 
         /// <summary>Indicates whether the left <see cref="PuzzleState" /> is equal to the right <see cref="PuzzleState" />.</summary>
