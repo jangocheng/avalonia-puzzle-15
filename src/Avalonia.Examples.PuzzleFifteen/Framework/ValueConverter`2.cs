@@ -6,7 +6,7 @@ using Portable.Xaml.Markup;
 
 namespace Avalonia.Examples.PuzzleFifteen.Framework
 {
-    internal abstract class ValueConverterMarkupExtension<TSource, TTarget> : MarkupExtension, IValueConverter
+    internal abstract class ValueConverter<TSource, TTarget> : MarkupExtension, IValueConverter
     {
         protected virtual TTarget Convert(TSource value, object parameter, CultureInfo culture)
         {

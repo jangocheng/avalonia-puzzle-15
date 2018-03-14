@@ -1,14 +1,14 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:cn="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
+        xmlns:ct="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
         xmlns:cv="clr-namespace:Avalonia.Examples.PuzzleFifteen.Converters;assembly=Avalonia.Examples.PuzzleFifteen">
-    <Style Selector="cn|PuzzleControl">
+    <Style Selector="ct|PuzzleControl">
         <Setter Property="Template">
             <ControlTemplate>
                 <Canvas Name="PART_Canvas" />
             </ControlTemplate>
         </Setter>
     </Style>
-    <Style Selector="cn|PuzzlePieceControl">
+    <Style Selector="ct|PuzzlePieceControl">
         <Setter Property="Template">
             <ControlTemplate>
                 <Border>

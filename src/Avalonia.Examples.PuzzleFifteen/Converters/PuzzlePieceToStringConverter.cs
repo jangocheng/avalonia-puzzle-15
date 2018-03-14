@@ -4,7 +4,7 @@ using Avalonia.Examples.PuzzleFifteen.GameEngine;
 
 namespace Avalonia.Examples.PuzzleFifteen.Converters
 {
-    internal sealed class PuzzlePieceToStringConverter : ValueConverterMarkupExtension<PuzzlePiece, string>
+    internal sealed class PuzzlePieceToStringConverter : ValueConverter<PuzzlePiece, string>
     {
         protected override string Convert(PuzzlePiece value, object parameter, CultureInfo culture)
         {

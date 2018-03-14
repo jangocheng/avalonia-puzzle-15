@@ -1,5 +1,5 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
-        xmlns:cn="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
+        xmlns:ct="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
         MinWidth="800"
         MinHeight="600"
         WindowState="Maximized"
@@ -32,7 +32,7 @@
                    FontWeight="Light"
                    FontSize="20"
                    Text="{Binding Path=ShuffleLegend, Mode=OneTime}" />
-        <cn:PuzzleControl Grid.Row="2"
+        <ct:PuzzleControl Grid.Row="2"
                           Width="400"
                           Height="400"
                           State="{Binding Path=PuzzleState, Mode=OneWay}" />
