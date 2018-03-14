@@ -1,4 +1,5 @@
 ﻿using System;
+using Avalonia.Animation;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -48,6 +49,10 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
                 };
 
                 pieceControl.Tapped += OnPieceControlTapped;
+                pieceControl.SetValue(Canvas.LeftProperty, 0.0);
+                pieceControl.SetValue(Canvas.TopProperty, 0.0);
+                pieceControl.PropertyTransitions.Add(new PropertyTransition(Canvas.LeftProperty, TimeSpan.FromSeconds(0.075), LinearEasing.For<double>()));
+                pieceControl.PropertyTransitions.Add(new PropertyTransition(Canvas.TopProperty, TimeSpan.FromSeconds(0.075), LinearEasing.For<double>()));
 
                 canvas.Children.Add(pieceControl);
             }
