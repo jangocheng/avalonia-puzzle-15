@@ -10,7 +10,7 @@ namespace Avalonia.Examples.PuzzleFifteen
     {
         public static void Main()
         {
-            Console.Title = string.Format(CultureInfo.InvariantCulture, Strings.GetString("app.console.title.template"), Strings.GetString("app.window.title"));
+            Console.Title = string.Format(CultureInfo.InvariantCulture, Strings.GetString("app.console.title_template"), Strings.GetString("app.window.title"));
             AppBuilder.Configure<App>().UsePlatformDetect().Start<ShellWindowView>(() => new ShellWindowViewModel());
         }
     }

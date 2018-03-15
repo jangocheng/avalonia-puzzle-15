@@ -20,11 +20,6 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
             StateProperty.Changed.AddClassHandler<PuzzleControl>(c => c.OnStatePropertyChanged);
         }
 
-        private void OnStatePropertyChanged(AvaloniaPropertyChangedEventArgs args)
-        {
-            ArrangePieceControls();
-        }
-
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
             base.OnTemplateApplied(e);
@@ -60,13 +55,11 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
             _pieceControls = canvas.Children;
         }
 
-        protected override Size ArrangeOverride(Size finalSize)
+        protected override void ArrangeCore(Rect finalRect)
         {
-            finalSize = base.ArrangeOverride(finalSize);
+            base.ArrangeCore(finalRect);
 
             ArrangePieceControls();
-
-            return finalSize;
         }
 
         private void ArrangePieceControls()
@@ -91,6 +84,11 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
                 pieceControl.SetValue(Canvas.LeftProperty, viewportLeft + pieceSlot.X * pieceSize);
                 pieceControl.SetValue(Canvas.TopProperty, viewportTop + pieceSlot.Y * pieceSize);
             }
+        }
+
+        private void OnStatePropertyChanged(AvaloniaPropertyChangedEventArgs args)
+        {
+            ArrangePieceControls();
         }
 
         private void OnPieceControlTapped(object sender, RoutedEventArgs e)

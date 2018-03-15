@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="app.console.title.template" xml:space="preserve">
+  <data name="app.console.title_template" xml:space="preserve">
     <value>{0} (Host)</value>
   </data>
   <data name="app.window.title" xml:space="preserve">
     <value>Avalonia Example - Puzzle "Fifteen"</value>
   </data>
-  <data name="puzzle.legend.movements" xml:space="preserve">
-    <value>Use space key to shuffle puzzle pieces</value>
-  </data>
-  <data name="puzzle.legend.shuffle" xml:space="preserve">
-    <value>Use arrow keys or pointer to move puzzle pieces</value>
-  </data>
-  <data name="puzzle.message.completed" xml:space="preserve">
+  <data name="puzzle.completion_message" xml:space="preserve">
     <value>YOU WON</value>
   </data>
-  <data name="puzzle.state.indexer.piece_not_found" xml:space="preserve">
+  <data name="puzzle.legend" xml:space="preserve">
+    <value>Use arrow keys or pointer to move and space key to shuffle</value>
+  </data>
+  <data name="puzzle.piece_not_found_message" xml:space="preserve">
     <value>The specified piece is not found</value>
+  </data>
+  <data name="puzzle.steps_template" xml:space="preserve">
+    <value>Steps: {0}</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Globalization;
+using System.Security.Cryptography;
 using System.Windows.Input;
 using Avalonia.Examples.PuzzleFifteen.GameEngine;
 using Avalonia.Examples.PuzzleFifteen.Resources;
@@ -15,6 +16,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         private readonly IBindableCommand _moveDownCommand;
 
         private PuzzleState _puzzleState = CreateShuffled();
+        private int _puzzleSteps;
         private bool _puzzleCompleted;
 
         public ShellWindowViewModel()
@@ -47,10 +49,12 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
 
         private void ShuffleCommandAction(object parameter)
         {
-            PuzzleState = CreateShuffled();
-
+            _puzzleState = CreateShuffled();
+            _puzzleSteps = 0;
             _puzzleCompleted = false;
 
+            RaisePropertyChanged(nameof(PuzzleState));
+            RaisePropertyChanged(nameof(PuzzleStepsInfo));
             RaisePropertyChanged(nameof(IsPuzzleCompleted));
         }
 
@@ -62,29 +66,29 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         private void MoveLeftCommandAction(object parameter)
         {
             PuzzleState = PuzzleState.Apply(PuzzleMovement.Left);
-            CheckPuzzleState();
         }
 
         private void MoveRightCommandAction(object parameter)
         {
             PuzzleState = PuzzleState.Apply(PuzzleMovement.Right);
-            CheckPuzzleState();
         }
 
         private void MoveUpCommandAction(object parameter)
         {
             PuzzleState = PuzzleState.Apply(PuzzleMovement.Up);
-            CheckPuzzleState();
         }
 
         private void MoveDownCommandAction(object parameter)
         {
             PuzzleState = PuzzleState.Apply(PuzzleMovement.Down);
-            CheckPuzzleState();
         }
 
-        private void CheckPuzzleState()
+        private void OnPuzzleStateUpdated()
         {
+            _puzzleSteps++;
+
+            RaisePropertyChanged(nameof(PuzzleStepsInfo));
+
             if (_puzzleState == PuzzleState.Completed)
             {
                 _puzzleCompleted = true;
@@ -96,7 +100,17 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         public PuzzleState PuzzleState
         {
             get => GetValue(ref _puzzleState);
-            set => SetValue(ref _puzzleState, value, CheckPuzzleState);
+            set => SetValue(ref _puzzleState, value, OnPuzzleStateUpdated);
+        }
+
+        public string PuzzleStepsInfo
+        {
+            get => string.Format(CultureInfo.InvariantCulture, Strings.GetString("puzzle.steps_template"), _puzzleSteps);
+        }
+
+        public bool IsPuzzleCompleted
+        {
+            get => GetValue(ref _puzzleCompleted);
         }
 
         public ICommand ShuffleCommand
@@ -124,29 +138,19 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
             get => _moveDownCommand;
         }
 
-        public bool IsPuzzleCompleted
-        {
-            get => GetValue(ref _puzzleCompleted);
-        }
-
         public string Title
         {
             get => Strings.GetString("app.window.title");
         }
 
-        public string MovementsLegend
+        public string Legend
         {
-            get => Strings.GetString("puzzle.legend.movements");
-        }
-
-        public string ShuffleLegend
-        {
-            get => Strings.GetString("puzzle.legend.shuffle");
+            get => Strings.GetString("puzzle.legend");
         }
 
         public string CompletionMessage
         {
-            get => Strings.GetString("puzzle.message.completed");
+            get => Strings.GetString("puzzle.completion_message");
         }
     }
 }

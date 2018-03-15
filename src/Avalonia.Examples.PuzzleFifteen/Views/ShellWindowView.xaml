@@ -4,7 +4,7 @@
         MinWidth="800"
         MinHeight="600"
         WindowState="Maximized"
-        Background="WhiteSmoke"
+        Background="{StaticResource ResourceKey=Brushes.Common.Background}"
         Title="{Binding Path=Title, Mode=OneTime}"
         Icon="resm:Avalonia.Examples.PuzzleFifteen.Assets.App.png">
     <Window.Styles>
@@ -39,22 +39,25 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   Classes="Legend"
-                   Text="{Binding Path=ShuffleLegend, Mode=OneTime}" />
+                   HorizontalAlignment="Center"
+                   FontSize="20"
+                   Text="{Binding Path=PuzzleStepsInfo}" />
         <ct:PuzzleControl Grid.Row="2"
                           Width="400"
                           Height="400"
                           State="{Binding Path=PuzzleState, Mode=TwoWay}" />
         <TextBlock Grid.Row="4"
-                   Classes="Legend"
-                   Text="{Binding Path=MovementsLegend, Mode=OneTime}" />
+                   HorizontalAlignment="Center"
+                   FontSize="18"
+                   FontWeight="Light"
+                   Text="{Binding Path=Legend, Mode=OneTime}" />
         <Border Grid.Row="2"
                 IsVisible="{Binding Path=IsPuzzleCompleted}"
                 Width="500"
                 Height="100"
                 BorderThickness="5"
                 BorderBrush="LimeGreen"
-                Background="WhiteSmoke">
+                Background="{StaticResource ResourceKey=Brushes.Common.Background}">
             <TextBlock Grid.Row="4"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"

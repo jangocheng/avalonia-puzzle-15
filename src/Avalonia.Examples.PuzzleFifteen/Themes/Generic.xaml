@@ -1,6 +1,13 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ct="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
         xmlns:cv="clr-namespace:Avalonia.Examples.PuzzleFifteen.Converters;assembly=Avalonia.Examples.PuzzleFifteen">
+    <Style>
+        <Style.Resources>
+            <SolidColorBrush x:Key="Brushes.Common.Background"
+                             Color="WhiteSmoke" />
+        </Style.Resources>
+    </Style>
     <Style Selector="ct|PuzzleControl">
         <Setter Property="Template">
             <ControlTemplate>

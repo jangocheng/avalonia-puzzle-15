@@ -57,27 +57,28 @@ namespace Avalonia.Examples.PuzzleFifteen.Tests
         [Fact]
         public void Indexer()
         {
-            var state = PuzzleState.Completed;
-
-            Assert.Equal((3, 3), state[PuzzlePiece.Space]);
+            Assert.Equal((3, 3), PuzzleState.Completed[PuzzlePiece.Space]);
         }
 
         [Fact]
         public void OperatorEquality()
         {
-            var state1 = default(PuzzleState);
-            var state2 = PuzzleState.Completed;
-
-            Assert.False(state1 == state2);
+            Assert.False(PuzzleState.Completed == default);
         }
 
         [Fact]
         public void OperatorInequality()
         {
-            var state1 = default(PuzzleState);
-            var state2 = PuzzleState.Completed;
+            Assert.True(PuzzleState.Completed != default);
+        }
 
-            Assert.True(state1 != state2);
+        [Fact]
+        public void ObjectGetHashCode()
+        {
+            var state1 = PuzzleState.Completed.Apply(PuzzleMovement.Down);
+            var state2 = PuzzleState.Completed.Apply(PuzzleMovement.Right);
+
+            Assert.NotEqual(state1.GetHashCode(), state2.GetHashCode());
         }
     }
 }

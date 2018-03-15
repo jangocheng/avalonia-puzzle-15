@@ -40,7 +40,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
                 }
             }
 
-            throw new InvalidOperationException(Strings.GetString("puzzle.state.indexer.piece_not_found"));
+            throw new InvalidOperationException(Strings.GetString("puzzle.piece_not_found"));
         }
 
         private void Apply(byte[] matrix, PuzzleMovement movement, int spaceX, int spaceY)
@@ -149,17 +149,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
         /// <returns><see langword="true" /> if the current <see cref="PuzzleState" /> is equal to the specified object; otherwise, <see langword="false" />.</returns>
         public override bool Equals(object obj)
         {
-            switch (obj)
-            {
-                case PuzzleState other:
-                    {
-                        return Equals(other);
-                    }
-                default:
-                    {
-                        return false;
-                    }
-            }
+            return (obj is PuzzleState other) && Equals(other);
         }
 
         /// <summary>Returns the hash code for the current <see cref="PuzzleState" />.</summary>
@@ -172,7 +162,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
 
                 for (var i = 0; i < _matrix.Length; i++)
                 {
-                    result = (result * 16777619) ^ _matrix[i].GetHashCode();
+                    result = (result * 16777619) ^ ((i + 1) * _matrix[i].GetHashCode());
                 }
 
                 return result;
