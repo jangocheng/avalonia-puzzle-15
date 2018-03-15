@@ -135,7 +135,4 @@
   <data name="puzzle.state.indexer.piece_not_found" xml:space="preserve">
     <value>The specified piece is not found</value>
   </data>
-  <data name="ui.converter.unsupported_operation" xml:space="preserve">
-    <value>The operation is not suported</value>
-  </data>
 </root>

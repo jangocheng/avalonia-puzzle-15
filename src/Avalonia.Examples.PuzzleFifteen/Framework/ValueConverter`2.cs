@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Avalonia.Examples.PuzzleFifteen.Resources;
 using Avalonia.Markup;
 using Portable.Xaml.Markup;
 
@@ -10,12 +9,12 @@ namespace Avalonia.Examples.PuzzleFifteen.Framework
     {
         protected virtual TTarget Convert(TSource value, object parameter, CultureInfo culture)
         {
-            throw new NotSupportedException(Strings.GetString("ui.converter.unsupported_operation"));
+            return default;
         }
 
         protected virtual TSource ConvertBack(TTarget value, object parameter, CultureInfo culture)
         {
-            throw new NotSupportedException(Strings.GetString("ui.converter.unsupported_operation"));
+            return default;
         }
 
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
