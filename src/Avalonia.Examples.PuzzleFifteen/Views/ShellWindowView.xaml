@@ -53,16 +53,18 @@
                    Text="{Binding Path=Legend, Mode=OneTime}" />
         <Border Grid.Row="2"
                 IsVisible="{Binding Path=IsPuzzleCompleted}"
-                Width="500"
-                Height="100"
-                BorderThickness="5"
-                BorderBrush="LimeGreen"
-                Background="{StaticResource ResourceKey=Brushes.Common.Background}">
-            <TextBlock Grid.Row="4"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="40"
-                       Text="{Binding Path=CompletionMessage, Mode=OneTime}" />
+                Background="Transparent">
+            <Border Width="500"
+                    Height="100"
+                    BorderThickness="5"
+                    BorderBrush="LimeGreen"
+                    Background="{StaticResource ResourceKey=Brushes.Common.Background}">
+                <TextBlock Grid.Row="4"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="40"
+                           Text="{Binding Path=CompletionMessage, Mode=OneTime}" />
+            </Border>
         </Border>
     </Grid>
 </Window>

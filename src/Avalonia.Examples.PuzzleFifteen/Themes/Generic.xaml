@@ -11,16 +11,20 @@
     <Style Selector="ct|PuzzleControl">
         <Setter Property="Template">
             <ControlTemplate>
-                <Canvas Name="PART_Canvas" />
+                <Canvas Name="PART_Canvas"
+                        Background="Transparent"
+                        Cursor="Hand" />
             </ControlTemplate>
         </Setter>
     </Style>
     <Style Selector="ct|PuzzlePieceControl">
+        <Setter Property="Background"
+                Value="Gainsboro" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Border>
-                    <Border Background="Gainsboro"
-                            Margin="5">
+                    <Border Margin="5"
+                            Background="{TemplateBinding Path=Background}">
                         <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="28"
@@ -29,5 +33,9 @@
                 </Border>
             </ControlTemplate>
         </Setter>
+    </Style>
+    <Style Selector="ct|PuzzlePieceControl:pointerover">
+        <Setter Property="Background"
+                Value="LightGray" />
     </Style>
 </Styles>
