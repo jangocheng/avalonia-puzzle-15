@@ -63,12 +63,14 @@ namespace Avalonia.Examples.PuzzleFifteen.Tests
         [Fact]
         public void OperatorEquality()
         {
+            Assert.True(PuzzleState.Completed == PuzzleState.Completed);
             Assert.False(PuzzleState.Completed == default);
         }
 
         [Fact]
         public void OperatorInequality()
         {
+            Assert.False(PuzzleState.Completed != PuzzleState.Completed);
             Assert.True(PuzzleState.Completed != default);
         }
 
@@ -79,6 +81,15 @@ namespace Avalonia.Examples.PuzzleFifteen.Tests
             var state2 = PuzzleState.Completed.Apply(PuzzleMovement.Right);
 
             Assert.NotEqual(state1.GetHashCode(), state2.GetHashCode());
+        }
+
+        [Fact]
+        public void ObjectEquals()
+        {
+            Assert.True(PuzzleState.Completed.Equals(PuzzleState.Completed));
+            Assert.False(PuzzleState.Completed.Equals(default(PuzzleState)));
+            Assert.False(PuzzleState.Completed.Equals(null));
+            Assert.False(PuzzleState.Completed.Equals(""));
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
 {
     internal sealed class ShellWindowViewModel : BindableObject
     {
+        private static readonly RandomNumberGenerator _rng = RandomNumberGenerator.Create();
+
         private readonly IBindableCommand _shuffleCommand;
         private readonly IBindableCommand _moveLeftCommand;
         private readonly IBindableCommand _moveRightCommand;
@@ -32,10 +34,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         {
             var bytes = new byte[1000];
 
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(bytes);
-            }
+            _rng.GetBytes(bytes);
 
             var movements = new PuzzleMovement[bytes.Length];
 
@@ -86,13 +85,12 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         private void OnPuzzleStateUpdated()
         {
             _puzzleSteps++;
+            _puzzleCompleted = _puzzleState == PuzzleState.Completed;
 
             RaisePropertyChanged(nameof(PuzzleStepsInfo));
 
-            if (_puzzleState == PuzzleState.Completed)
+            if (_puzzleCompleted)
             {
-                _puzzleCompleted = true;
-
                 RaisePropertyChanged(nameof(IsPuzzleCompleted));
             }
         }
@@ -105,12 +103,12 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
 
         public string PuzzleStepsInfo
         {
-            get => string.Format(CultureInfo.InvariantCulture, Strings.GetString("puzzle.steps_template"), _puzzleSteps);
+            get => string.Format(CultureInfo.InvariantCulture, Strings.GetString("puzzle.moves_template"), _puzzleSteps);
         }
 
         public bool IsPuzzleCompleted
         {
-            get => GetValue(ref _puzzleCompleted);
+            get => _puzzleCompleted;
         }
 
         public ICommand ShuffleCommand

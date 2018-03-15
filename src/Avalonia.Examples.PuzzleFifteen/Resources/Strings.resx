@@ -129,10 +129,10 @@
   <data name="puzzle.legend" xml:space="preserve">
     <value>Use arrow keys or pointer to move and space key to shuffle</value>
   </data>
+  <data name="puzzle.moves_template" xml:space="preserve">
+    <value>Moves: {0}</value>
+  </data>
   <data name="puzzle.piece_not_found_message" xml:space="preserve">
     <value>The specified piece is not found</value>
-  </data>
-  <data name="puzzle.steps_template" xml:space="preserve">
-    <value>Steps: {0}</value>
   </data>
 </root>

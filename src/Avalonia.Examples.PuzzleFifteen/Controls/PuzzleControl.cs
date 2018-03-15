@@ -24,12 +24,10 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
         {
             base.OnTemplateApplied(e);
 
-            var canvas = e.NameScope.Find("PART_Canvas") as Canvas;
-
-            if (canvas == null)
-            {
-                return;
-            }
+            var canvas = (Canvas)e.NameScope.Find("PART_Canvas");
+            var pieceControlEasing = LinearEasing.For<double>();
+            var pieceControlPropertyTransitionsX = new PropertyTransition(Canvas.LeftProperty, TimeSpan.FromSeconds(0.075), pieceControlEasing);
+            var pieceControlPropertyTransitionsY = new PropertyTransition(Canvas.TopProperty, TimeSpan.FromSeconds(0.075), pieceControlEasing);
 
             foreach (var piece in Enum.GetValues(typeof(PuzzlePiece)))
             {
@@ -46,8 +44,8 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
                 pieceControl.Tapped += OnPieceControlTapped;
                 pieceControl.SetValue(Canvas.LeftProperty, 0.0);
                 pieceControl.SetValue(Canvas.TopProperty, 0.0);
-                pieceControl.PropertyTransitions.Add(new PropertyTransition(Canvas.LeftProperty, TimeSpan.FromSeconds(0.075), LinearEasing.For<double>()));
-                pieceControl.PropertyTransitions.Add(new PropertyTransition(Canvas.TopProperty, TimeSpan.FromSeconds(0.075), LinearEasing.For<double>()));
+                pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsX);
+                pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsY);
 
                 canvas.Children.Add(pieceControl);
             }
