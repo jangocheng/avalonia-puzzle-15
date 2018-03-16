@@ -1,12 +1,11 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ct="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
         MinWidth="800"
         MinHeight="600"
         WindowState="Maximized"
         Background="{StaticResource ResourceKey=Brushes.Common.Background}"
         Title="{Binding Path=Title, Mode=OneTime}"
-        Icon="resm:Avalonia.Examples.PuzzleFifteen.Assets.App.png">
+        Icon="{StaticResource ResourceKey=Images.Application}">
     <Window.KeyBindings>
         <KeyBinding Command="{Binding Path=ShuffleCommand, Mode=OneTime}"
                     Gesture="Space" />

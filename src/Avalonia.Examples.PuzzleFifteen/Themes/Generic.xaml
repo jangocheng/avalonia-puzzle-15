@@ -20,6 +20,9 @@
                                Text="{Binding Path=., Converter={cv:PuzzlePieceToStringConverter}}" />
                 </Border>
             </ControlTemplate>
+            <WindowIcon x:Key="Images.Application">
+                <![CDATA[resm:Avalonia.Examples.PuzzleFifteen.Assets.Application.png]]>
+            </WindowIcon>
         </Style.Resources>
     </Style>
     <Style Selector="ct|PuzzleControl">

@@ -10,15 +10,9 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
 {
     internal sealed class PuzzleControl : TemplatedControl
     {
-        public static readonly StyledProperty<PuzzleState> StateProperty =
-            AvaloniaProperty.Register<PuzzleControl, PuzzleState>(nameof(State));
+        public static readonly StyledProperty<PuzzleState> StateProperty = AvaloniaProperty.Register<PuzzleControl, PuzzleState>(nameof(State));
 
         private AvaloniaList<IControl> _pieceControls;
-
-        static PuzzleControl()
-        {
-            StateProperty.Changed.AddClassHandler<PuzzleControl>(c => c.OnStatePropertyChanged);
-        }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
@@ -29,29 +23,26 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
             var pieceControlPropertyTransitionsX = new PropertyTransition(Canvas.LeftProperty, TimeSpan.FromSeconds(0.075), pieceControlEasing);
             var pieceControlPropertyTransitionsY = new PropertyTransition(Canvas.TopProperty, TimeSpan.FromSeconds(0.075), pieceControlEasing);
 
-            foreach (var piece in Enum.GetValues(typeof(PuzzlePiece)))
+            foreach (var piece in (PuzzlePiece[])Enum.GetValues(typeof(PuzzlePiece)))
             {
-                if (object.Equals(piece, PuzzlePiece.Space))
+                if (piece != PuzzlePiece.Space)
                 {
-                    continue;
+                    var pieceControl = new PuzzlePieceControl();
+
+                    pieceControl.DataContext = piece;
+
+                    // Setting default values for Canvas properties since property transition doesn't work with NaN values
+
+                    pieceControl.SetValue(Canvas.LeftProperty, 0.0);
+                    pieceControl.SetValue(Canvas.TopProperty, 0.0);
+
+                    pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsX);
+                    pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsY);
+
+                    pieceControl.Tapped += OnPieceControlTapped;
+
+                    canvas.Children.Add(pieceControl);
                 }
-
-                var pieceControl = new PuzzlePieceControl
-                {
-                    DataContext = piece
-                };
-
-                pieceControl.Tapped += OnPieceControlTapped;
-
-                // Setting default values for Canvas properties since property transition doesn't work with NaN values
-
-                pieceControl.SetValue(Canvas.LeftProperty, 0.0);
-                pieceControl.SetValue(Canvas.TopProperty, 0.0);
-
-                pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsX);
-                pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsY);
-
-                canvas.Children.Add(pieceControl);
             }
 
             _pieceControls = canvas.Children;
@@ -64,33 +55,36 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
             ArrangePieceControls();
         }
 
-        private void ArrangePieceControls()
+        protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
         {
-            if (_pieceControls == null)
+            base.OnPropertyChanged(e);
+
+            if (e.Property == StateProperty)
             {
-                return;
-            }
-
-            var viewportSize = Math.Min(Width - Padding.Left - Padding.Right, Height - Padding.Top - Padding.Bottom);
-            var viewportLeft = (Width - viewportSize) / 2;
-            var viewportTop = (Height - viewportSize) / 2;
-            var pieceSize = viewportSize / 4;
-
-            for (var i = 0; i < _pieceControls.Count; i++)
-            {
-                var pieceControl = (Control)_pieceControls[i];
-                var pieceSlot = State[(PuzzlePiece)pieceControl.DataContext];
-
-                pieceControl.Width = pieceSize;
-                pieceControl.Height = pieceSize;
-                pieceControl.SetValue(Canvas.LeftProperty, viewportLeft + pieceSlot.X * pieceSize);
-                pieceControl.SetValue(Canvas.TopProperty, viewportTop + pieceSlot.Y * pieceSize);
+                ArrangePieceControls();
             }
         }
 
-        private void OnStatePropertyChanged(AvaloniaPropertyChangedEventArgs args)
+        private void ArrangePieceControls()
         {
-            ArrangePieceControls();
+            if (_pieceControls != null)
+            {
+                var viewportSize = Math.Min(Width - Padding.Left - Padding.Right, Height - Padding.Top - Padding.Bottom);
+                var viewportLeft = (Width - viewportSize) / 2;
+                var viewportTop = (Height - viewportSize) / 2;
+                var pieceSize = viewportSize / 4;
+
+                for (var i = 0; i < _pieceControls.Count; i++)
+                {
+                    var pieceControl = (Control)_pieceControls[i];
+                    var pieceSlot = State[(PuzzlePiece)pieceControl.DataContext];
+
+                    pieceControl.Width = pieceSize;
+                    pieceControl.Height = pieceSize;
+                    pieceControl.SetValue(Canvas.LeftProperty, viewportLeft + pieceSlot.X * pieceSize);
+                    pieceControl.SetValue(Canvas.TopProperty, viewportTop + pieceSlot.Y * pieceSize);
+                }
+            }
         }
 
         private void OnPieceControlTapped(object sender, RoutedEventArgs e)
