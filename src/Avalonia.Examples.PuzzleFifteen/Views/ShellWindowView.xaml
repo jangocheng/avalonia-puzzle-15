@@ -7,16 +7,6 @@
         Background="{StaticResource ResourceKey=Brushes.Common.Background}"
         Title="{Binding Path=Title, Mode=OneTime}"
         Icon="resm:Avalonia.Examples.PuzzleFifteen.Assets.App.png">
-    <Window.Styles>
-        <Style Selector="TextBlock.Legend">
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="FontWeight"
-                    Value="Light" />
-            <Setter Property="HorizontalAlignment"
-                    Value="Center" />
-        </Style>
-    </Window.Styles>
     <Window.KeyBindings>
         <KeyBinding Command="{Binding Path=ShuffleCommand, Mode=OneTime}"
                     Gesture="Space" />
@@ -33,9 +23,9 @@
           VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
@@ -51,9 +41,10 @@
                    FontSize="18"
                    FontWeight="Light"
                    Text="{Binding Path=Legend, Mode=OneTime}" />
-        <Border Grid.Row="2"
-                IsVisible="{Binding Path=IsPuzzleCompleted}"
-                Background="Transparent">
+        <Grid Grid.Row="2"
+              IsVisible="{Binding Path=IsPuzzleCompleted}">
+            <Border Background="{StaticResource ResourceKey=Brushes.Common.Background}"
+                    Opacity="0.5" />
             <Border Width="500"
                     Height="100"
                     BorderThickness="5"
@@ -65,6 +56,6 @@
                            FontSize="40"
                            Text="{Binding Path=CompletionMessage, Mode=OneTime}" />
             </Border>
-        </Border>
+        </Grid>
     </Grid>
 </Window>

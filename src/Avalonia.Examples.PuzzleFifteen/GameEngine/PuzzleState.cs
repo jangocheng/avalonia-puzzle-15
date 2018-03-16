@@ -19,7 +19,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
         {
             var matrix = new byte[0x10];
 
-            for (var i = 0; i < 0x0F; i++)
+            for (var i = 0; i < matrix.Length - 1; i++)
             {
                 matrix[i] = (byte)(i + 1);
             }
@@ -29,66 +29,55 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
 
         private static (int X, int Y) FindPiece(byte[] matrix, PuzzlePiece piece)
         {
-            for (var x = 0; x < 4; x++)
+            for (var i = 0; i < matrix.Length; i++)
             {
-                for (var y = 0; y < 4; y++)
+                if (matrix[i] == (byte)piece)
                 {
-                    if (matrix[y * 4 + x] == (byte)piece)
-                    {
-                        return (x, y);
-                    }
+                    return (i % 4, i / 4);
                 }
             }
 
             throw new InvalidOperationException(Strings.GetString("puzzle.piece_not_found"));
         }
 
-        private void Apply(byte[] matrix, PuzzleMovement movement, int spaceX, int spaceY)
+        private static void Apply(byte[] matrix, PuzzleMovement movement, (int X, int Y) spaceSlot)
         {
             switch (movement)
             {
                 case PuzzleMovement.Left:
                     {
-                        if (spaceX == 3)
+                        if (spaceSlot.X != 3)
                         {
-                            return;
+                            matrix[spaceSlot.Y * 4 + spaceSlot.X + 0] = matrix[spaceSlot.Y * 4 + spaceSlot.X + 1];
+                            matrix[spaceSlot.Y * 4 + spaceSlot.X + 1] = (byte)PuzzlePiece.Space;
                         }
-
-                        matrix[spaceY * 4 + spaceX + 0] = matrix[spaceY * 4 + spaceX + 1];
-                        matrix[spaceY * 4 + spaceX + 1] = (byte)PuzzlePiece.Space;
                     }
                     break;
                 case PuzzleMovement.Right:
                     {
-                        if (spaceX == 0)
+                        if (spaceSlot.X != 0)
                         {
-                            return;
+                            matrix[spaceSlot.Y * 4 + spaceSlot.X + 0] = matrix[spaceSlot.Y * 4 + spaceSlot.X - 1];
+                            matrix[spaceSlot.Y * 4 + spaceSlot.X - 1] = (byte)PuzzlePiece.Space;
                         }
-
-                        matrix[spaceY * 4 + spaceX + 0] = matrix[spaceY * 4 + spaceX - 1];
-                        matrix[spaceY * 4 + spaceX - 1] = (byte)PuzzlePiece.Space;
                     }
                     break;
                 case PuzzleMovement.Up:
                     {
-                        if (spaceY == 3)
+                        if (spaceSlot.Y != 3)
                         {
-                            return;
+                            matrix[(spaceSlot.Y + 0) * 4 + spaceSlot.X] = matrix[(spaceSlot.Y + 1) * 4 + spaceSlot.X];
+                            matrix[(spaceSlot.Y + 1) * 4 + spaceSlot.X] = (byte)PuzzlePiece.Space;
                         }
-
-                        matrix[(spaceY + 0) * 4 + spaceX] = matrix[(spaceY + 1) * 4 + spaceX];
-                        matrix[(spaceY + 1) * 4 + spaceX] = (byte)PuzzlePiece.Space;
                     }
                     break;
                 case PuzzleMovement.Down:
                     {
-                        if (spaceY == 0)
+                        if (spaceSlot.Y != 0)
                         {
-                            return;
+                            matrix[(spaceSlot.Y + 0) * 4 + spaceSlot.X] = matrix[(spaceSlot.Y - 1) * 4 + spaceSlot.X];
+                            matrix[(spaceSlot.Y - 1) * 4 + spaceSlot.X] = (byte)PuzzlePiece.Space;
                         }
-
-                        matrix[(spaceY + 0) * 4 + spaceX] = matrix[(spaceY - 1) * 4 + spaceX];
-                        matrix[(spaceY - 1) * 4 + spaceX] = (byte)PuzzlePiece.Space;
                     }
                     break;
             }
@@ -136,9 +125,7 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
 
             for (var i = 0; i < movements.Length; i++)
             {
-                var (spaceX, spaceY) = FindPiece(matrix, PuzzlePiece.Space);
-
-                Apply(matrix, movements[i], spaceX, spaceY);
+                Apply(matrix, movements[i], FindPiece(matrix, PuzzlePiece.Space));
             }
 
             return new PuzzleState(matrix);

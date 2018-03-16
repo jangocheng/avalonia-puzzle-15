@@ -6,33 +6,31 @@
         <Style.Resources>
             <SolidColorBrush x:Key="Brushes.Common.Background"
                              Color="WhiteSmoke" />
-        </Style.Resources>
-    </Style>
-    <Style Selector="ct|PuzzleControl">
-        <Setter Property="Template">
-            <ControlTemplate>
+            <ControlTemplate x:Key="Templates.PuzzleControl">
                 <Canvas Name="PART_Canvas"
                         Background="Transparent"
                         Cursor="Hand" />
             </ControlTemplate>
-        </Setter>
+            <ControlTemplate x:Key="Templates.PuzzlePieceControl">
+                <Border Margin="5"
+                        Background="{TemplateBinding Path=Background}">
+                    <TextBlock VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="28"
+                               Text="{Binding Path=., Converter={cv:PuzzlePieceToStringConverter}}" />
+                </Border>
+            </ControlTemplate>
+        </Style.Resources>
+    </Style>
+    <Style Selector="ct|PuzzleControl">
+        <Setter Property="Template"
+                Value="{StaticResource ResourceKey=Templates.PuzzleControl}" />
     </Style>
     <Style Selector="ct|PuzzlePieceControl">
         <Setter Property="Background"
                 Value="Gainsboro" />
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Border>
-                    <Border Margin="5"
-                            Background="{TemplateBinding Path=Background}">
-                        <TextBlock VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   FontSize="28"
-                                   Text="{Binding Path=., Converter={cv:PuzzlePieceToStringConverter}}" />
-                    </Border>
-                </Border>
-            </ControlTemplate>
-        </Setter>
+        <Setter Property="Template"
+                Value="{StaticResource ResourceKey=Templates.PuzzlePieceControl}" />
     </Style>
     <Style Selector="ct|PuzzlePieceControl:pointerover">
         <Setter Property="Background"
