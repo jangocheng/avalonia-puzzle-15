@@ -24,7 +24,7 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
         {
             base.OnTemplateApplied(e);
 
-            var canvas = (Canvas)e.NameScope.Find("PART_Canvas");
+            var canvas = e.NameScope.Get<Canvas>("PART_Canvas");
             var pieceControlEasing = LinearEasing.For<double>();
             var pieceControlPropertyTransitionsX = new PropertyTransition(Canvas.LeftProperty, TimeSpan.FromSeconds(0.075), pieceControlEasing);
             var pieceControlPropertyTransitionsY = new PropertyTransition(Canvas.TopProperty, TimeSpan.FromSeconds(0.075), pieceControlEasing);
@@ -42,8 +42,12 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
                 };
 
                 pieceControl.Tapped += OnPieceControlTapped;
+
+                // Setting default values for Canvas properties since property transition doesn't work with NaN values
+
                 pieceControl.SetValue(Canvas.LeftProperty, 0.0);
                 pieceControl.SetValue(Canvas.TopProperty, 0.0);
+
                 pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsX);
                 pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsY);
 
@@ -67,9 +71,9 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
                 return;
             }
 
-            var viewportSize = Math.Min(DesiredSize.Width - Padding.Left - Padding.Right, DesiredSize.Height - Padding.Top - Padding.Bottom);
-            var viewportLeft = (DesiredSize.Width - viewportSize) / 2;
-            var viewportTop = (DesiredSize.Height - viewportSize) / 2;
+            var viewportSize = Math.Min(Width - Padding.Left - Padding.Right, Height - Padding.Top - Padding.Bottom);
+            var viewportLeft = (Width - viewportSize) / 2;
+            var viewportTop = (Height - viewportSize) / 2;
             var pieceSize = viewportSize / 4;
 
             for (var i = 0; i < _pieceControls.Count; i++)
