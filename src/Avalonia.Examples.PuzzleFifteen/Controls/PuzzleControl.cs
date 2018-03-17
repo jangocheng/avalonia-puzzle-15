@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using Avalonia.Animation;
-using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Examples.PuzzleFifteen.GameEngine;
@@ -12,7 +12,7 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
     {
         public static readonly StyledProperty<PuzzleState> StateProperty = AvaloniaProperty.Register<PuzzleControl, PuzzleState>(nameof(State));
 
-        private AvaloniaList<IControl> _pieceControls;
+        private IReadOnlyList<IControl> _pieceControls;
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
@@ -89,7 +89,7 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
 
         private void OnPieceControlTapped(object sender, RoutedEventArgs e)
         {
-            var pieceSlot = State[(PuzzlePiece)((Control)sender).DataContext];
+            var pieceSlot = State[(PuzzlePiece)((IControl)sender).DataContext];
             var spaceSlot = State[PuzzlePiece.Space];
 
             if (pieceSlot.Y == spaceSlot.Y)

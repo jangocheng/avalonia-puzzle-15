@@ -17,7 +17,7 @@
                     <TextBlock VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                FontSize="28"
-                               Text="{Binding Path=., Converter={cv:PuzzlePieceToStringConverter}}" />
+                               Text="{Binding Path=., Mode=OneTime, Converter={cv:PuzzlePieceToStringConverter}}" />
                 </Border>
             </ControlTemplate>
             <WindowIcon x:Key="Images.Application">
