@@ -1,7 +1,6 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ct="clr-namespace:Avalonia.Examples.PuzzleFifteen.Controls;assembly=Avalonia.Examples.PuzzleFifteen"
-        xmlns:cv="clr-namespace:Avalonia.Examples.PuzzleFifteen.Converters;assembly=Avalonia.Examples.PuzzleFifteen">
+        xmlns:a="urn:application.ui">
     <Style>
         <Style.Resources>
             <SolidColorBrush x:Key="Brushes.Common.Background"
@@ -17,7 +16,7 @@
                     <TextBlock VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                FontSize="28"
-                               Text="{Binding Path=., Mode=OneTime, Converter={cv:PuzzlePieceToStringConverter}}" />
+                               Text="{Binding Path=., Mode=OneTime, Converter={a:PuzzlePieceToStringConverter}}" />
                 </Border>
             </ControlTemplate>
             <WindowIcon x:Key="Images.Application">
@@ -25,17 +24,17 @@
             </WindowIcon>
         </Style.Resources>
     </Style>
-    <Style Selector="ct|PuzzleControl">
+    <Style Selector="a|PuzzleControl">
         <Setter Property="Template"
                 Value="{StaticResource ResourceKey=Templates.PuzzleControl}" />
     </Style>
-    <Style Selector="ct|PuzzlePieceControl">
+    <Style Selector="a|PuzzlePieceControl">
         <Setter Property="Background"
                 Value="Gainsboro" />
         <Setter Property="Template"
                 Value="{StaticResource ResourceKey=Templates.PuzzlePieceControl}" />
     </Style>
-    <Style Selector="ct|PuzzlePieceControl:pointerover">
+    <Style Selector="a|PuzzlePieceControl:pointerover">
         <Setter Property="Background"
                 Value="LightGray" />
     </Style>
