@@ -4,7 +4,7 @@
         MinHeight="600"
         WindowState="Maximized"
         Background="{StaticResource ResourceKey=Brushes.Common.Background}"
-        Title="{Binding Path=Title, Mode=OneTime}"
+        Title="{a:String Name=App.Window.Title}"
         Icon="{StaticResource ResourceKey=Images.Application}">
     <Window.KeyBindings>
         <KeyBinding Command="{Binding Path=ShuffleCommand, Mode=OneTime}"
@@ -39,7 +39,7 @@
                    HorizontalAlignment="Center"
                    FontSize="18"
                    FontWeight="Light"
-                   Text="{Binding Path=Legend, Mode=OneTime}" />
+                   Text="{a:String Name=Puzzle.Legend}" />
         <Grid Grid.Row="2"
               IsVisible="{Binding Path=IsPuzzleCompleted}">
             <Border Background="{StaticResource ResourceKey=Brushes.Common.Background}"
@@ -53,7 +53,7 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            FontSize="40"
-                           Text="{Binding Path=CompletionMessage, Mode=OneTime}" />
+                           Text="{a:String Name=Puzzle.Congratulations}" />
             </Border>
         </Grid>
     </Grid>

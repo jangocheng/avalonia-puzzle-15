@@ -135,20 +135,5 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         {
             get => _moveDownCommand;
         }
-
-        public string Title
-        {
-            get => Strings.GetString("app.window.title");
-        }
-
-        public string Legend
-        {
-            get => Strings.GetString("puzzle.legend");
-        }
-
-        public string CompletionMessage
-        {
-            get => Strings.GetString("puzzle.completion_message");
-        }
     }
 }

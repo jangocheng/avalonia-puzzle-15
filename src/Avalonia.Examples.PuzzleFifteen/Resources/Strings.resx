@@ -123,7 +123,7 @@
   <data name="app.window.title" xml:space="preserve">
     <value>Avalonia Example - Puzzle "Fifteen"</value>
   </data>
-  <data name="puzzle.completion_message" xml:space="preserve">
+  <data name="puzzle.congratulations" xml:space="preserve">
     <value>YOU WON</value>
   </data>
   <data name="puzzle.legend" xml:space="preserve">
