@@ -7,10 +7,10 @@ namespace Avalonia.Examples.PuzzleFifteen.Views
     {
         public ShellWindowView()
         {
-            InitializeComponent();
+            Initialize();
         }
 
-        private void InitializeComponent()
+        private void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
         }

@@ -29,11 +29,14 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
 
         private static (int X, int Y) FindPiece(byte[] matrix, PuzzlePiece piece)
         {
-            for (var i = 0; i < matrix.Length; i++)
+            if (matrix != null)
             {
-                if (matrix[i] == (byte)piece)
+                for (var i = 0; i < matrix.Length; i++)
                 {
-                    return (i % 4, i / 4);
+                    if (matrix[i] == (byte)piece)
+                    {
+                        return (i % 4, i / 4);
+                    }
                 }
             }
 
@@ -119,6 +122,11 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
         /// <returns>The puzzle state after movements.</returns>
         public PuzzleState Apply(params PuzzleMovement[] movements)
         {
+            if (_matrix == null)
+            {
+                return this;
+            }
+
             var matrix = new byte[_matrix.Length];
 
             _matrix.CopyTo(matrix, 0);
@@ -147,9 +155,12 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
             {
                 var result = (int)2166136261;
 
-                for (var i = 0; i < _matrix.Length; i++)
+                if (_matrix != null)
                 {
-                    result = (result * 16777619) ^ ((i + 1) * _matrix[i].GetHashCode());
+                    for (var i = 0; i < _matrix.Length; i++)
+                    {
+                        result = (result * 16777619) ^ ((i + 1) * _matrix[i].GetHashCode());
+                    }
                 }
 
                 return result;

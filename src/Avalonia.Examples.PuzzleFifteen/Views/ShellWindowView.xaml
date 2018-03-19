@@ -7,20 +7,20 @@
         Title="{a:String Name=App.Window.Title}"
         Icon="{StaticResource ResourceKey=Images.Application}">
     <Window.KeyBindings>
-        <KeyBinding Command="{Binding Path=ShuffleCommand, Mode=OneTime}"
-                    Gesture="Space" />
-        <KeyBinding Command="{Binding Path=MoveCommand, Mode=OneTime}"
-                    CommandParameter="Left"
-                    Gesture="Left" />
-        <KeyBinding Command="{Binding Path=MoveCommand, Mode=OneTime}"
-                    CommandParameter="Right"
-                    Gesture="Right" />
-        <KeyBinding Command="{Binding Path=MoveCommand, Mode=OneTime}"
-                    CommandParameter="Up"
-                    Gesture="Up" />
-        <KeyBinding Command="{Binding Path=MoveCommand, Mode=OneTime}"
-                    CommandParameter="Down"
-                    Gesture="Down" />
+        <KeyBinding Gesture="Space"
+                    Command="{Binding Path=ShuffleCommand, Mode=OneTime}" />
+        <KeyBinding Gesture="Left"
+                    Command="{Binding Path=MoveCommand, Mode=OneTime}"
+                    CommandParameter="Left" />
+        <KeyBinding Gesture="Right"
+                    Command="{Binding Path=MoveCommand, Mode=OneTime}"
+                    CommandParameter="Right" />
+        <KeyBinding Gesture="Up"
+                    Command="{Binding Path=MoveCommand, Mode=OneTime}"
+                    CommandParameter="Up" />
+        <KeyBinding Gesture="Down"
+                    Command="{Binding Path=MoveCommand, Mode=OneTime}"
+                    CommandParameter="Down" />
     </Window.KeyBindings>
     <Grid Margin="10"
           VerticalAlignment="Center">
@@ -54,8 +54,8 @@
                     BorderBrush="LimeGreen"
                     Background="{StaticResource ResourceKey=Brushes.Common.Background}">
                 <TextBlock Grid.Row="4"
-                           VerticalAlignment="Center"
                            HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
                            FontSize="40"
                            Text="{a:String Name=Puzzle.Congratulations}" />
             </Border>

@@ -13,8 +13,8 @@
             <ControlTemplate x:Key="Templates.PuzzlePieceControl">
                 <Border Margin="5"
                         Background="{TemplateBinding Path=Background}">
-                    <TextBlock VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
                                FontSize="28"
                                Text="{Binding Path=., Mode=OneTime, Converter={a:PuzzlePieceToStringConverter}}" />
                 </Border>
