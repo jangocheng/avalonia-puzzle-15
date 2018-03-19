@@ -35,10 +35,8 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
 
                     pieceControl.SetValue(Canvas.LeftProperty, 0.0);
                     pieceControl.SetValue(Canvas.TopProperty, 0.0);
-
                     pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsX);
                     pieceControl.PropertyTransitions.Add(pieceControlPropertyTransitionsY);
-
                     pieceControl.Tapped += OnPieceControlTapped;
 
                     canvas.Children.Add(pieceControl);
@@ -91,28 +89,23 @@ namespace Avalonia.Examples.PuzzleFifteen.Controls
         {
             var pieceSlot = State[(PuzzlePiece)((IControl)sender).DataContext];
             var spaceSlot = State[PuzzlePiece.Space];
+            var difference = (X: pieceSlot.X - spaceSlot.X, Y: pieceSlot.Y - spaceSlot.Y);
 
-            if (pieceSlot.Y == spaceSlot.Y)
+            if (difference.Equals((+1, +0)))
             {
-                if (pieceSlot.X == spaceSlot.X + 1)
-                {
-                    State = State.Apply(PuzzleMovement.Left);
-                }
-                else if (pieceSlot.X == spaceSlot.X - 1)
-                {
-                    State = State.Apply(PuzzleMovement.Right);
-                }
+                State = State.Apply(PuzzleMovement.Left);
             }
-            else if (pieceSlot.X == spaceSlot.X)
+            if (difference.Equals((-1, +0)))
             {
-                if (pieceSlot.Y == spaceSlot.Y + 1)
-                {
-                    State = State.Apply(PuzzleMovement.Up);
-                }
-                else if (pieceSlot.Y == spaceSlot.Y - 1)
-                {
-                    State = State.Apply(PuzzleMovement.Down);
-                }
+                State = State.Apply(PuzzleMovement.Right);
+            }
+            if (difference.Equals((+0, +1)))
+            {
+                State = State.Apply(PuzzleMovement.Up);
+            }
+            if (difference.Equals((+0, -1)))
+            {
+                State = State.Apply(PuzzleMovement.Down);
             }
         }
 

@@ -45,45 +45,34 @@ namespace Avalonia.Examples.PuzzleFifteen.GameEngine
 
         private static void Apply(byte[] matrix, PuzzleMovement movement, (int X, int Y) spaceSlot)
         {
+            var difference = default((int X, int Y));
+
             switch (movement)
             {
                 case PuzzleMovement.Left:
                     {
-                        if (spaceSlot.X != 3)
-                        {
-                            matrix[spaceSlot.Y * 4 + spaceSlot.X + 0] = matrix[spaceSlot.Y * 4 + spaceSlot.X + 1];
-                            matrix[spaceSlot.Y * 4 + spaceSlot.X + 1] = (byte)PuzzlePiece.Space;
-                        }
+                        difference = spaceSlot.X != 3 ? (+1, +0) : default;
                     }
                     break;
                 case PuzzleMovement.Right:
                     {
-                        if (spaceSlot.X != 0)
-                        {
-                            matrix[spaceSlot.Y * 4 + spaceSlot.X + 0] = matrix[spaceSlot.Y * 4 + spaceSlot.X - 1];
-                            matrix[spaceSlot.Y * 4 + spaceSlot.X - 1] = (byte)PuzzlePiece.Space;
-                        }
+                        difference = spaceSlot.X != 0 ? (-1, +0) : default;
                     }
                     break;
                 case PuzzleMovement.Up:
                     {
-                        if (spaceSlot.Y != 3)
-                        {
-                            matrix[(spaceSlot.Y + 0) * 4 + spaceSlot.X] = matrix[(spaceSlot.Y + 1) * 4 + spaceSlot.X];
-                            matrix[(spaceSlot.Y + 1) * 4 + spaceSlot.X] = (byte)PuzzlePiece.Space;
-                        }
+                        difference = spaceSlot.Y != 3 ? (+0, +1) : default;
                     }
                     break;
                 case PuzzleMovement.Down:
                     {
-                        if (spaceSlot.Y != 0)
-                        {
-                            matrix[(spaceSlot.Y + 0) * 4 + spaceSlot.X] = matrix[(spaceSlot.Y - 1) * 4 + spaceSlot.X];
-                            matrix[(spaceSlot.Y - 1) * 4 + spaceSlot.X] = (byte)PuzzlePiece.Space;
-                        }
+                        difference = spaceSlot.Y != 0 ? (+0, -1) : default;
                     }
                     break;
             }
+
+            matrix[spaceSlot.Y * 4 + spaceSlot.X] = matrix[spaceSlot.Y * 4 + difference.Y * 4 + spaceSlot.X + difference.X];
+            matrix[spaceSlot.Y * 4 + difference.Y * 4 + spaceSlot.X + difference.X] = (byte)PuzzlePiece.Space;
         }
 
         private bool Equals(PuzzleState other)
