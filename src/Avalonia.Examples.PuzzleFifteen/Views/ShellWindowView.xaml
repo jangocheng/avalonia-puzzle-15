@@ -9,13 +9,17 @@
     <Window.KeyBindings>
         <KeyBinding Command="{Binding Path=ShuffleCommand, Mode=OneTime}"
                     Gesture="Space" />
-        <KeyBinding Command="{Binding Path=MoveLeftCommand, Mode=OneTime}"
+        <KeyBinding Command="{Binding Path=MoveCommand, Mode=OneTime}"
+                    CommandParameter="Left"
                     Gesture="Left" />
-        <KeyBinding Command="{Binding Path=MoveRightCommand, Mode=OneTime}"
+        <KeyBinding Command="{Binding Path=MoveCommand, Mode=OneTime}"
+                    CommandParameter="Right"
                     Gesture="Right" />
-        <KeyBinding Command="{Binding Path=MoveUpCommand, Mode=OneTime}"
+        <KeyBinding Command="{Binding Path=MoveCommand, Mode=OneTime}"
+                    CommandParameter="Up"
                     Gesture="Up" />
-        <KeyBinding Command="{Binding Path=MoveDownCommand, Mode=OneTime}"
+        <KeyBinding Command="{Binding Path=MoveCommand, Mode=OneTime}"
+                    CommandParameter="Down"
                     Gesture="Down" />
     </Window.KeyBindings>
     <Grid Margin="10"

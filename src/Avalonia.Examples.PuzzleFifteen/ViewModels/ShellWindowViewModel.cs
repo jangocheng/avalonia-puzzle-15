@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Windows.Input;
 using Avalonia.Examples.PuzzleFifteen.GameEngine;
@@ -12,10 +13,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         private static readonly RandomNumberGenerator _rng = RandomNumberGenerator.Create();
 
         private readonly IBindableCommand _shuffleCommand;
-        private readonly IBindableCommand _moveLeftCommand;
-        private readonly IBindableCommand _moveRightCommand;
-        private readonly IBindableCommand _moveUpCommand;
-        private readonly IBindableCommand _moveDownCommand;
+        private readonly IBindableCommand _moveCommand;
 
         private PuzzleState _puzzleState = CreateShuffled();
         private int _puzzleSteps;
@@ -24,10 +22,7 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
         public ShellWindowViewModel()
         {
             _shuffleCommand = new BindableCommand(ShuffleCommandAction);
-            _moveLeftCommand = new BindableCommand(MoveLeftCommandAction, MoveCommandPredicate);
-            _moveRightCommand = new BindableCommand(MoveRightCommandAction, MoveCommandPredicate);
-            _moveUpCommand = new BindableCommand(MoveUpCommandAction, MoveCommandPredicate);
-            _moveDownCommand = new BindableCommand(MoveDownCommandAction, MoveCommandPredicate);
+            _moveCommand = new BindableCommand(MoveCommandAction, MoveCommandPredicate);
         }
 
         private static PuzzleState CreateShuffled()
@@ -57,29 +52,14 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
             RaisePropertyChanged(nameof(IsPuzzleCompleted));
         }
 
+        private void MoveCommandAction(object parameter)
+        {
+            PuzzleState = PuzzleState.Apply(Enum.Parse<PuzzleMovement>((string)parameter));
+        }
+
         private bool MoveCommandPredicate(object parameter)
         {
             return !_puzzleCompleted;
-        }
-
-        private void MoveLeftCommandAction(object parameter)
-        {
-            PuzzleState = PuzzleState.Apply(PuzzleMovement.Left);
-        }
-
-        private void MoveRightCommandAction(object parameter)
-        {
-            PuzzleState = PuzzleState.Apply(PuzzleMovement.Right);
-        }
-
-        private void MoveUpCommandAction(object parameter)
-        {
-            PuzzleState = PuzzleState.Apply(PuzzleMovement.Up);
-        }
-
-        private void MoveDownCommandAction(object parameter)
-        {
-            PuzzleState = PuzzleState.Apply(PuzzleMovement.Down);
         }
 
         private void OnPuzzleStateUpdated()
@@ -116,24 +96,9 @@ namespace Avalonia.Examples.PuzzleFifteen.ViewModels
             get => _shuffleCommand;
         }
 
-        public ICommand MoveLeftCommand
+        public ICommand MoveCommand
         {
-            get => _moveLeftCommand;
-        }
-
-        public ICommand MoveRightCommand
-        {
-            get => _moveRightCommand;
-        }
-
-        public ICommand MoveUpCommand
-        {
-            get => _moveUpCommand;
-        }
-
-        public ICommand MoveDownCommand
-        {
-            get => _moveDownCommand;
+            get => _moveCommand;
         }
     }
 }
