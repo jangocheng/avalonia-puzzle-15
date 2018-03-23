@@ -7,6 +7,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <NoWin32Manifest>True</NoWin32Manifest>
     <OutputPath>$(RepositoryPath)/bin/bin/$(AssemblyName)/$(Configuration)/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
     <ApplicationIcon />
     <StartupObject />
   </PropertyGroup>
@@ -28,5 +29,6 @@
     <PackageReference Include="Avalonia" Version="0.6.1" />
     <PackageReference Include="Avalonia.Desktop" Version="0.6.1" />
     <PackageReference Include="Chimera.UI.ComponentModel" Version="1.4.0" />
+    <PackageReference Include="Common.DotNet.AppLauncher" Version="1.0.0" />
   </ItemGroup>
 </Project>
